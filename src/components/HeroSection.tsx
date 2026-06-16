@@ -2,13 +2,34 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MapPin, Calendar, UtensilsCrossed } from 'lucide-react';
 import { siteContent } from '../lib/siteContent';
 
-export const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  onSearch: (filters: { name: string; location: string; cuisine: string }) => void;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [searchName, setSearchName] = useState('');
+  const [searchLocation, setSearchLocation] = useState('');
+  const [searchCuisine, setSearchCuisine] = useState('');
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearch({
+      name: searchName,
+      location: searchLocation,
+      cuisine: searchCuisine,
+    });
+    // Scroll to results
+    const resultsSection = document.getElementById('search-results');
+    if (resultsSection) {
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <section
@@ -59,46 +80,57 @@ export const HeroSection: React.FC = () => {
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
               }`}
             >
-              <div className="bg-white border-2 border-border rounded-full p-2 shadow-lg flex flex-col sm:flex-row gap-2">
-                {/* Location Input */}
-                <div className="flex items-center gap-3 px-4 py-3 flex-1 min-w-0">
-                  <MapPin className="w-5 h-5 text-secondary flex-shrink-0" />
-                  <input
-                    type="text"
-                    placeholder={siteContent.hero.searchPlaceholders.location}
-                    className="bg-transparent outline-none text-primary placeholder:text-muted w-full"
-                  />
+              <form onSubmit={handleSearch}>
+                <div className="bg-white border-2 border-border rounded-full p-2 shadow-lg flex flex-col sm:flex-row gap-2">
+                  {/* Location Input */}
+                  <div className="flex items-center gap-3 px-4 py-3 flex-1 min-w-0">
+                    <MapPin className="w-5 h-5 text-secondary flex-shrink-0" />
+                    <input
+                      type="text"
+                      placeholder={siteContent.hero.searchPlaceholders.location}
+                      value={searchLocation}
+                      onChange={(e) => setSearchLocation(e.target.value)}
+                      className="bg-transparent outline-none text-primary placeholder:text-muted w-full"
+                    />
+                  </div>
+
+                  <div className="hidden sm:block w-px bg-border" />
+
+                  {/* Name/Search Input */}
+                  <div className="flex items-center gap-3 px-4 py-3 flex-1 min-w-0">
+                    <Calendar className="w-5 h-5 text-secondary flex-shrink-0" />
+                    <input
+                      type="text"
+                      placeholder="Restaurant name..."
+                      value={searchName}
+                      onChange={(e) => setSearchName(e.target.value)}
+                      className="bg-transparent outline-none text-primary placeholder:text-muted w-full"
+                    />
+                  </div>
+
+                  <div className="hidden sm:block w-px bg-border" />
+
+                  {/* Cuisine Input */}
+                  <div className="flex items-center gap-3 px-4 py-3 flex-1 min-w-0">
+                    <UtensilsCrossed className="w-5 h-5 text-secondary flex-shrink-0" />
+                    <input
+                      type="text"
+                      placeholder={siteContent.hero.searchPlaceholders.cuisine}
+                      value={searchCuisine}
+                      onChange={(e) => setSearchCuisine(e.target.value)}
+                      className="bg-transparent outline-none text-primary placeholder:text-muted w-full"
+                    />
+                  </div>
+
+                  {/* CTA Button */}
+                  <button 
+                    type="submit"
+                    className="bg-secondary text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-secondary-dark transition-colors duration-200 whitespace-nowrap"
+                  >
+                    {siteContent.hero.searchCta}
+                  </button>
                 </div>
-
-                <div className="hidden sm:block w-px bg-border" />
-
-                {/* Date Input */}
-                <div className="flex items-center gap-3 px-4 py-3 flex-1 min-w-0">
-                  <Calendar className="w-5 h-5 text-secondary flex-shrink-0" />
-                  <input
-                    type="text"
-                    placeholder={siteContent.hero.searchPlaceholders.date}
-                    className="bg-transparent outline-none text-primary placeholder:text-muted w-full"
-                  />
-                </div>
-
-                <div className="hidden sm:block w-px bg-border" />
-
-                {/* Cuisine Input */}
-                <div className="flex items-center gap-3 px-4 py-3 flex-1 min-w-0">
-                  <UtensilsCrossed className="w-5 h-5 text-secondary flex-shrink-0" />
-                  <input
-                    type="text"
-                    placeholder={siteContent.hero.searchPlaceholders.cuisine}
-                    className="bg-transparent outline-none text-primary placeholder:text-muted w-full"
-                  />
-                </div>
-
-                {/* CTA Button */}
-                <button className="bg-secondary text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-secondary-dark transition-colors duration-200 whitespace-nowrap">
-                  {siteContent.hero.searchCta}
-                </button>
-              </div>
+              </form>
 
               {/* Trust Indicator */}
               <p className="text-sm text-muted mt-6">

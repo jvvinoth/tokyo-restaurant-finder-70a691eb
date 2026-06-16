@@ -28,6 +28,9 @@ export const TopPicks: React.FC = () => {
     };
   }, []);
 
+  // Show only first 8 restaurants in TopPicks section
+  const displayedRestaurants = siteContent.topPicks.restaurants.slice(0, 8);
+
   return (
     <section
       id="top-picks"
@@ -53,7 +56,7 @@ export const TopPicks: React.FC = () => {
 
         {/* Restaurant Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {siteContent.topPicks.restaurants.map((restaurant, index) => (
+          {displayedRestaurants.map((restaurant, index) => (
             <div
               key={restaurant.name}
               className={`bg-background rounded-2xl overflow-hidden border border-border group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${

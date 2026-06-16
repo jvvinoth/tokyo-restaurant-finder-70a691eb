@@ -1,3 +1,16 @@
+export interface Restaurant {
+  name: string;
+  neighborhood: string;
+  cuisine: string;
+  priceRange: string;
+  image: string;
+  tags: string[];
+  description: string;
+  rating: number;
+  distance: string;
+  phone: string;
+}
+
 export const siteContent = {
   meta: {
     title: "Tokyo Restaurant Finder - Skip the overwhelm. Book the right table.",
@@ -105,6 +118,9 @@ export const siteContent = {
         image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=1600&q=80",
         tags: ["Omakase", "Michelin ★★★"],
         description: "Intimate 7-seat counter with exceptional nigiri and seasonal kaiseki.",
+        rating: 4.9,
+        distance: "2.3 km",
+        phone: "+81-3-3589-4412",
       },
       {
         name: "Torishiki",
@@ -114,6 +130,9 @@ export const siteContent = {
         image: "https://images.unsplash.com/photo-1622973536968-3ead9e780960?auto=format&fit=crop&w=1600&q=80",
         tags: ["Counter seating", "Reservation only"],
         description: "Tokyo's most coveted yakitori spot. Book weeks ahead.",
+        rating: 4.8,
+        distance: "3.7 km",
+        phone: "+81-3-3491-0039",
       },
       {
         name: "Tempura Kondo",
@@ -123,6 +142,9 @@ export const siteContent = {
         image: "https://images.unsplash.com/photo-1542528180-1c2803fa042b?auto=format&fit=crop&w=1600&q=80",
         tags: ["Michelin ★★", "Seasonal"],
         description: "Legendary sweet potato tempura and impeccable technique.",
+        rating: 4.7,
+        distance: "1.8 km",
+        phone: "+81-3-5568-0923",
       },
       {
         name: "Nakiryu",
@@ -132,6 +154,9 @@ export const siteContent = {
         image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1600&q=80",
         tags: ["Michelin ★", "Tantanmen"],
         description: "Michelin-starred ramen at under ¥1,000. Worth the queue.",
+        rating: 4.6,
+        distance: "5.2 km",
+        phone: "+81-3-3951-0745",
       },
       {
         name: "Ishikawa",
@@ -141,6 +166,9 @@ export const siteContent = {
         image: "https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?auto=format&fit=crop&w=1600&q=80",
         tags: ["Michelin ★★★", "Private rooms"],
         description: "Modern kaiseki in a refined machiya setting.",
+        rating: 4.9,
+        distance: "4.1 km",
+        phone: "+81-3-5225-0173",
       },
       {
         name: "Kozue",
@@ -150,6 +178,9 @@ export const siteContent = {
         image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=1600&q=80",
         tags: ["Park Hyatt", "Tokyo views"],
         description: "Contemporary Japanese cuisine 40 floors up with skyline views.",
+        rating: 4.7,
+        distance: "2.9 km",
+        phone: "+81-3-5322-1234",
       },
       {
         name: "Tenmatsu",
@@ -159,6 +190,9 @@ export const siteContent = {
         image: "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=1600&q=80",
         tags: ["Casual", "English menu"],
         description: "Approachable tempura sets in a relaxed neighborhood setting.",
+        rating: 4.5,
+        distance: "1.5 km",
+        phone: "+81-3-3404-0789",
       },
       {
         name: "Yoroniku",
@@ -168,8 +202,155 @@ export const siteContent = {
         image: "https://images.unsplash.com/photo-1588347818036-8e4e4b0b1ac9?auto=format&fit=crop&w=1600&q=80",
         tags: ["Premium beef", "Modern"],
         description: "Top-tier wagyu and impeccable service in a sleek space.",
+        rating: 4.8,
+        distance: "2.1 km",
+        phone: "+81-3-5778-4829",
       },
-    ],
+      {
+        name: "Sukiyabashi Jiro Roppongi",
+        neighborhood: "Roppongi",
+        cuisine: "Sushi",
+        priceRange: "¥¥¥¥",
+        image: "https://images.unsplash.com/photo-1583623025817-d180a2221d0a?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Omakase", "World-famous"],
+        description: "Branch of the legendary sushi master's restaurant.",
+        rating: 4.9,
+        distance: "2.4 km",
+        phone: "+81-3-5413-6626",
+      },
+      {
+        name: "Afuri Harajuku",
+        neighborhood: "Harajuku",
+        cuisine: "Ramen",
+        priceRange: "¥",
+        image: "https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Yuzu shio", "Modern"],
+        description: "Light, citrus-infused ramen in a contemporary setting.",
+        rating: 4.4,
+        distance: "1.2 km",
+        phone: "+81-3-6447-2910",
+      },
+      {
+        name: "Tsuta",
+        neighborhood: "Sugamo",
+        cuisine: "Ramen",
+        priceRange: "¥",
+        image: "https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Michelin ★", "Truffle"],
+        description: "World's first Michelin-starred ramen shop with truffle-infused broth.",
+        rating: 4.6,
+        distance: "6.3 km",
+        phone: "+81-3-3943-1007",
+      },
+      {
+        name: "Kikunoi",
+        neighborhood: "Akasaka",
+        cuisine: "Kaiseki",
+        priceRange: "¥¥¥¥",
+        image: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Michelin ★★★", "Tea ceremony"],
+        description: "Exquisite seasonal kaiseki with impeccable presentation.",
+        rating: 4.9,
+        distance: "3.2 km",
+        phone: "+81-3-3568-6055",
+      },
+      {
+        name: "Tonki Meguro",
+        neighborhood: "Meguro",
+        cuisine: "Tonkatsu",
+        priceRange: "¥¥",
+        image: "https://images.unsplash.com/photo-1628863353691-0071c8c1874c?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Classic", "Counter seating"],
+        description: "Historic tonkatsu specialist serving crispy perfection since 1939.",
+        rating: 4.5,
+        distance: "3.5 km",
+        phone: "+81-3-3491-9928",
+      },
+      {
+        name: "Ginza Kyubey",
+        neighborhood: "Ginza",
+        cuisine: "Sushi",
+        priceRange: "¥¥¥¥",
+        image: "https://images.unsplash.com/photo-1564489563601-c53cfc451e93?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Traditional", "Since 1935"],
+        description: "Legendary sushi institution beloved by locals and celebrities.",
+        rating: 4.8,
+        distance: "1.9 km",
+        phone: "+81-3-3571-6523",
+      },
+      {
+        name: "Ichiran Shibuya",
+        neighborhood: "Shibuya",
+        cuisine: "Ramen",
+        priceRange: "¥",
+        image: "https://images.unsplash.com/photo-1623341214825-9f4f963727da?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Solo dining", "24 hours"],
+        description: "Iconic tonkotsu ramen in private booths, perfect for solo diners.",
+        rating: 4.3,
+        distance: "0.8 km",
+        phone: "+81-3-3463-3667",
+      },
+      {
+        name: "Uobei Shibuya",
+        neighborhood: "Shibuya",
+        cuisine: "Sushi",
+        priceRange: "¥",
+        image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Conveyor belt", "Tech-forward"],
+        description: "High-tech conveyor belt sushi with tablet ordering and great value.",
+        rating: 4.2,
+        distance: "0.9 km",
+        phone: "+81-3-3461-1117",
+      },
+      {
+        name: "Butagumi Nishiazabu",
+        neighborhood: "Nishiazabu",
+        cuisine: "Tonkatsu",
+        priceRange: "¥¥¥",
+        image: "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Premium pork", "Modern"],
+        description: "Elevated tonkatsu using premium heritage pork breeds.",
+        rating: 4.6,
+        distance: "2.7 km",
+        phone: "+81-3-5466-6775",
+      },
+      {
+        name: "Den",
+        neighborhood: "Jingumae",
+        cuisine: "Japanese",
+        priceRange: "¥¥¥¥",
+        image: "https://images.unsplash.com/photo-1514326640560-7d063f2aad85?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Michelin ★★", "Innovative"],
+        description: "Playful, innovative Japanese cuisine that reimagines tradition.",
+        rating: 4.8,
+        distance: "1.4 km",
+        phone: "+81-3-6455-5635",
+      },
+      {
+        name: "Maisen Aoyama",
+        neighborhood: "Aoyama",
+        cuisine: "Tonkatsu",
+        priceRange: "¥¥",
+        image: "https://images.unsplash.com/photo-1604908815653-ego9d9521ed4?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Historic building", "Family-friendly"],
+        description: "Famous tonkatsu in a converted public bathhouse from the Meiji era.",
+        rating: 4.4,
+        distance: "1.7 km",
+        phone: "+81-3-3470-0071",
+      },
+      {
+        name: "Chugoku Hanten Shinbashi",
+        neighborhood: "Shinbashi",
+        cuisine: "Chinese",
+        priceRange: "¥¥",
+        image: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1600&q=80",
+        tags: ["Sichuan", "Spicy"],
+        description: "Authentic Sichuan cuisine with numbing mapo tofu and dan dan noodles.",
+        rating: 4.5,
+        distance: "2.5 km",
+        phone: "+81-3-3591-2866",
+      },
+    ] as Restaurant[],
   },
   
   bookingCta: {
@@ -216,8 +397,10 @@ export const siteContent = {
       { platform: "Twitter", href: "#", icon: "Twitter" },
       { platform: "Facebook", href: "#", icon: "Facebook" },
     ],
+    legal: [
+      { label: "Privacy Policy", href: "#" },
+      { label: "Terms of Service", href: "#" },
+    ],
     copyright: "© 2024 Tokyo Restaurant Finder. All rights reserved.",
   },
-} as const;
-
-export type SiteContent = typeof siteContent;
+};
