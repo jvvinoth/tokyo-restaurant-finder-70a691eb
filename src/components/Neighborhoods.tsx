@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { siteContent } from '../lib/siteContent';
 
-export const Neighborhoods: React.FC = () => {
+interface NeighborhoodsProps {
+  onNeighborhoodClick?: (neighborhood: string) => void;
+}
+
+export const Neighborhoods: React.FC<NeighborhoodsProps> = ({ onNeighborhoodClick }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -27,6 +31,13 @@ export const Neighborhoods: React.FC = () => {
       }
     };
   }, []);
+
+  const handleClick = (neighborhoodName: string) => {
+    if (onNeighborhoodClick) {
+      onNeighborhoodClick(neighborhoodName);
+      window.scrollTo(0, 0);
+    }
+  };
 
   return (
     <section
@@ -56,6 +67,7 @@ export const Neighborhoods: React.FC = () => {
           {siteContent.neighborhoods.items.map((neighborhood, index) => (
             <div
               key={neighborhood.name}
+              onClick={() => handleClick(neighborhood.name)}
               className={`group relative rounded-xl overflow-hidden aspect-[4/3] cursor-pointer transition-all duration-500 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}

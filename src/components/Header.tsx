@@ -28,10 +28,29 @@ export const Header: React.FC = () => {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    
+    // If we're on a neighborhood page, go back to home first
+    if (window.location.hash.startsWith('#neighborhood/')) {
+      window.location.hash = '';
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    window.location.hash = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -47,11 +66,8 @@ export const Header: React.FC = () => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <a
-              href="#hero"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick('#hero');
-              }}
+              href="#"
+              onClick={handleLogoClick}
               className="text-2xl font-serif font-semibold text-primary tracking-tight"
             >
               {siteContent.header.logo}

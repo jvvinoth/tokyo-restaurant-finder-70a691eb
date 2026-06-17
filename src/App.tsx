@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
 import { SearchResults } from './components/SearchResults';
@@ -7,12 +7,36 @@ import { Neighborhoods } from './components/Neighborhoods';
 import { TopPicks } from './components/TopPicks';
 import { BookingCta } from './components/BookingCta';
 import { Footer } from './components/Footer';
+import { NeighborhoodPage } from './components/NeighborhoodPage';
 import { siteContent } from './lib/siteContent';
 import { Restaurant } from './lib/siteContent';
 
 function App() {
   const [searchActive, setSearchActive] = useState(false);
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>([]);
+  const [currentPage, setCurrentPage] = useState<'home' | 'neighborhood'>('home');
+  const [selectedNeighborhood, setSelectedNeighborhood] = useState<string>('');
+
+  // Handle hash-based routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#neighborhood/')) {
+        const neighborhood = decodeURIComponent(hash.replace('#neighborhood/', ''));
+        setSelectedNeighborhood(neighborhood);
+        setCurrentPage('neighborhood');
+      } else {
+        setCurrentPage('home');
+      }
+    };
+
+    // Check initial hash
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   const handleSearch = (filters: { name: string; location: string; cuisine: string }) => {
     const { name, location, cuisine } = filters;
@@ -36,6 +60,28 @@ function App() {
     setSearchActive(true);
   };
 
+  const handleNeighborhoodClick = (neighborhood: string) => {
+    setSelectedNeighborhood(neighborhood);
+    window.location.hash = `neighborhood/${encodeURIComponent(neighborhood)}`;
+  };
+
+  const handleBackToHome = () => {
+    window.location.hash = '';
+  };
+
+  if (currentPage === 'neighborhood') {
+    return (
+      <>
+        <Header />
+        <NeighborhoodPage 
+          neighborhood={selectedNeighborhood} 
+          onBack={handleBackToHome}
+        />
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -43,7 +89,7 @@ function App() {
         <HeroSection onSearch={handleSearch} />
         <SearchResults restaurants={filteredRestaurants} isVisible={searchActive} />
         <HowItWorks />
-        <Neighborhoods />
+        <Neighborhoods onNeighborhoodClick={handleNeighborhoodClick} />
         <TopPicks />
         <BookingCta />
       </main>
